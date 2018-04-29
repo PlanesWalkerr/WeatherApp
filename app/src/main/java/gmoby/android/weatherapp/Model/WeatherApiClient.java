@@ -3,10 +3,11 @@ package gmoby.android.weatherapp.Model;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import java.util.List;
+
 import io.reactivex.Observable;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
-import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -42,8 +43,12 @@ public class WeatherApiClient {
 
     }
 
-    public Observable<CurrentWeatherApiResponse> getCurrentWeather(int id){
+    public Observable<CurrentWeatherApiResponse> getCurrentWeather(long id) {
         return weatherApiService.getCurrentWeather(version, id, APPID);
 
+    }
+
+    public Observable<List<City>> getCityList(String q) {
+        return weatherApiService.getCityList(version, q, "like", 10, APPID);
     }
 }

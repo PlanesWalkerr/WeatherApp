@@ -1,10 +1,10 @@
 package gmoby.android.weatherapp.Model;
 
+import java.util.List;
+
 import io.reactivex.Observable;
-import retrofit2.Response;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
-import retrofit2.http.PATCH;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
@@ -17,5 +17,14 @@ public interface WeatherApiService {
     @Headers("Accept: application/json")
     @GET("{version}/weather")
     Observable<CurrentWeatherApiResponse> getCurrentWeather(@Path("version") String version,
-                                  @Query("id") int id,);
+                                                            @Query("id") long id,
+                                                            @Query("appid") String appid);
+
+    @Headers("Accept: application/json")
+    @GET("{version}/find")
+    Observable<List<City>> getCityList(@Path("version") String version,
+                                       @Query("q") String q,
+                                       @Query("type") String type,
+                                       @Query("cnt") int cnt,
+                                       @Query("appid") String appid);
 }
